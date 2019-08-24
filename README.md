@@ -24,7 +24,7 @@ git clone https://github.com/corytaitchison/online-reviews.git && cd online-revi
 
 1. Open terminal
 2. Check that you have python installed
-   (should be `3.7.3`)
+   (should be `3.7.x`)
 
 ```bash
 python --version
