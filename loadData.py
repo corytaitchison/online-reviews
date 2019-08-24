@@ -5,7 +5,7 @@ import sys
 
 # Limit how many lines to read (cannot read whole file at once
 # otherwise system runs out of memory).
-# Reccommend maximum 1e6 (1 million lines)
+# Recommend maximum 1e6 (1 million lines)
 readLimit = 1e3
 
 
