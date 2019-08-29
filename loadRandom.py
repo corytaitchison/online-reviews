@@ -5,7 +5,7 @@ import pandas as pd
 import sys
 
 
-def loadRandom(location, k=10, targetNum=1e3, seed=12345):
+def loadRandom(location, k=10, targetNum=1e5, seed=12345):
     # Location = location of file to load in, k = number of partitions,
     # targetNum is the number of observations wanted after random sampling
     random.seed(seed)
@@ -13,7 +13,7 @@ def loadRandom(location, k=10, targetNum=1e3, seed=12345):
     weights = np.array(random.sample(range(1, 1000), k))
     chunkSize = int(6e6/k)  # TODO: Replace with actual size of the data
     # Array of number of observations per chunk
-    partitions = (weights * chunkSize / sum(weights)).astype(int)
+    partitions = (weights * targetNum / sum(weights)).astype(int)
 
     returnPanda = pd.DataFrame()
 
