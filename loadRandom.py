@@ -5,7 +5,7 @@ import pandas as pd
 import sys
 
 
-def loadRandom(location, k=10, targetNum=1e5, seed=12345):
+def loadRandom(location, k=10, targetNum=1e4, seed=12345):
     # Location = location of file to load in, k = number of partitions,
     # targetNum is the number of observations wanted after random sampling
     random.seed(seed)
