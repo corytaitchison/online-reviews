@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
-from loadRandom import loadRandom
+from loadRandom import loadRandom, loadRandom2
+from time import perf_counter
 
 
 def countWords(text):
@@ -10,8 +11,11 @@ def countWords(text):
 
 
 if __name__ == '__main__':
+    start = perf_counter()
     data = loadRandom(
-        '/Users/caitchison/Documents/Yelp/yelp_dataset/review.json').loc[:, ('stars', 'text', 'useful')]
+        '/Users/caitchison/Documents/Yelp/yelp_dataset/review.json', 1e5).loc[:, ('stars', 'text', 'useful')]
+    print("Time taken to load: ", perf_counter() - start, "s")
+
     starCorr = np.corrcoef(data.stars, data.useful)
     avgWords = [countWords(text) for text in data.text]
     avgWordsCorr = np.corrcoef(avgWords, data.useful)
