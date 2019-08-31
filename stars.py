@@ -23,6 +23,8 @@ if __name__ == '__main__':
         '/Users/caitchison/Documents/Yelp/yelp_dataset/review.json', 1e5).loc[:, ('stars', 'text', 'useful')]
     print("Time taken to load: ", perf_counter() - start, "s")
 
+    # data = data[data.useful > 4]
+
     starCorr = np.corrcoef(data.stars, data.useful)
     avgWords = [len(text.split(" ")) for text in data.text]
     results = getLM(avgWords, data.useful)
