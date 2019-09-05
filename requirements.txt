@@ -1,2 +1,6 @@
 pandas~=0.24.2
 numpy~=1.17.0
+numpy_indexed
+matplotlib.pyplot
+statsmodels.api
+textblob
