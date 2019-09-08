@@ -8,8 +8,9 @@ import matplotlib.pyplot as plt
 import numpy_indexed as npi
 
 if __name__ == '__main__':
+    seed = 1
     data = loadRandom(
-        '/Users/caitchison/Documents/Yelp/yelp_dataset/review.json', 1e5, 12456).loc[
+        '/Users/caitchison/Documents/Yelp/yelp_dataset/review.json', 1e5, seed).loc[
             :, ('stars', 'text', 'useful', 'cool', 'funny')]
 
     # Get metric and mask
@@ -25,15 +26,21 @@ if __name__ == '__main__':
     interactions = interactions[mask]
 
     x = np.log10(minAge)
-    x_unique, y_mean = npi.group_by(x).median(interactions)
+    x_unique, y_mean = npi.group_by(x).mean(interactions)
 
     # Get results
-    results = getLM(x_unique[x_unique < 1.3][1:], y_mean[x_unique < 1.3][1:])
-    print("READABILITY\n", results.summary())
+    results = getLM(x_unique[x_unique < 1.3][1:],
+                    y_mean[x_unique < 1.3][1:])
 
-    mask = (x > 0.35) & (x < 1.3)
-    results = getLM(x, interactions)
-    print("READABILITY (2 < AGE < 20)\n", results.summary())
+    """
+    plt.hist(rsq, density=False, bins=15, rwidth=0.95)
+    plt.title('Correlations of Readability to Interactions (N=1e5, n=1e2)')
+    plt.xlabel('Pearson Correlation Coefficient')
+    plt.ylabel('Count')
+    plt.show()
+
+    """
+    print("READABILITY (Means)\n", results.summary())
 
     # Get graph
     plt.subplot(2, 1, 1)
