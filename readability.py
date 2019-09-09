@@ -3,19 +3,19 @@ from readability_score.calculators.fleschkincaid import FleschKincaid
 import pandas as pd
 import numpy as np
 from loadRandom import loadRandom
-from stars import getLM
+from models import getLM, getNBM
 import matplotlib.pyplot as plt
 import numpy_indexed as npi
 
 if __name__ == '__main__':
-    seed = 1
+    seed = 2
     data = loadRandom(
         '/Users/caitchison/Documents/Yelp/yelp_dataset/review.json', 1e5, seed).loc[
             :, ('stars', 'text', 'useful', 'cool', 'funny')]
 
     # Get metric and mask
     interactions = np.array(data.useful + data.cool + data.funny)
-    mask = interactions > 0
+    mask = interactions >= np.median(interactions)
     interactions = interactions[mask]
 
     # Get readability score using FleischKincaid
@@ -26,7 +26,7 @@ if __name__ == '__main__':
     interactions = interactions[mask]
 
     x = np.log10(minAge)
-    x_unique, y_mean = npi.group_by(x).mean(interactions)
+    x_unique, y_mean = npi.group_by(x).median(interactions)
 
     # Get results
     results = getLM(x_unique[x_unique < 1.3][1:],
@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
     # Get graph
     plt.subplot(2, 1, 1)
-    plt.scatter(x, np.log(interactions), alpha=0.5)
+    plt.scatter(x, np.log10(interactions), alpha=0.5)
     plt.title('Readability Score vs Interactions')
     plt.ylabel('Interactions Count (log10)')
 
