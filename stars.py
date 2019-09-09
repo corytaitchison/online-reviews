@@ -4,18 +4,13 @@ from loadRandom import loadRandom, loadRandom2
 from time import perf_counter
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
+from models import getLM
 
 
 def countWords(text):
     sentences = text.split(".")
     wordCount = [len(sentence.split(" ")) for sentence in sentences]
     return np.mean(wordCount)
-
-
-def getLM(x, y):
-    x = sm.add_constant(np.array(x).reshape((-1, 1)))
-    model = sm.OLS(y, x)
-    return model.fit()
 
 
 if __name__ == '__main__':
