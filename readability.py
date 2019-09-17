@@ -2,15 +2,18 @@ from readability_score.calculators.fleschkincaid import FleschKincaid
 # Download from https://github.com/wimmuskee/readability-score
 import pandas as pd
 import numpy as np
-from loadRandom import loadRandom
+from loadRandom import loadRandom, loadRandom2
 from models import getLM, getNBM
 import matplotlib.pyplot as plt
 import numpy_indexed as npi
 
 if __name__ == '__main__':
     seed = 2
-    data = loadRandom(
-        '/Users/caitchison/Documents/Yelp/yelp_dataset/review.json', 1e5, seed).loc[
+    # data = loadRandom(
+    #     '/Users/caitchison/Documents/Yelp/yelp_dataset/review.json', 1e5, seed).loc[
+    #         :, ('stars', 'text', 'useful', 'cool', 'funny')]
+    data = loadRandom2(
+        '/Users/caitchison/Documents/Yelp/yelp_dataset/restaurants_only.csv', 1e5, seed, 3778803).loc[
             :, ('stars', 'text', 'useful', 'cool', 'funny')]
 
     # Get metric and mask

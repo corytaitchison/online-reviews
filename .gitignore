@@ -1,4 +1,6 @@
 ignore.py
+other/
+readability_score/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
