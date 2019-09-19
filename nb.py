@@ -37,7 +37,6 @@ if __name__ == '__main__':
     # Calculate "interaction" score
     data['interactions'] = data.useful + data.cool + data.funny
     data = data[data['interactions'] >= _subsets[0]].dropna()
-    # TODO: Make equal sampling from each set (e.g 3000 for 0, 3000 for 1 etc)
 
     # Subset to get equal amounts of low-useful and high-useful
     masks = [data.interactions == x for x in _subsets]
