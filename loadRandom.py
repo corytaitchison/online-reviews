@@ -42,10 +42,10 @@ def loadRandom2(location, targetNum=1e6, seed=12345, n=6000000-1):
 if __name__ == '__main__':
     location = '/Users/caitchison/Documents/Yelp/yelp_dataset/restaurants_only.csv'
     data = loadRandom2(location, 1e5, seed=2019, n=3778803)
-    with open('LIWC/sample4.csv', mode='w') as file:
+    with open('LIWC/sample3.csv', mode='w') as file:
         # quoting=csv.QUOTE_ALL
         writer = csv.writer(file, delimiter=',', quotechar='"')
         writer.writerow(['text', 'useful', 'cool', 'funny', 'date'])
         for i in range(len(data)):
             writer.writerow([data['text'][i], data['useful']
-                             [i], data['cool'][i], data['funny'][i]])
+                             [i], data['cool'][i], data['funny'][i], data['date'][i]])
